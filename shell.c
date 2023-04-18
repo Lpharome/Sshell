@@ -29,9 +29,9 @@ int main(void)
 				continue;
 			}
 			fullpathpipe = _fullpathpipe(avg, PATH, copy);
-			if (checkbuiltins(av, pipe, exitstatus) != 0)
+			if (checkbuiltins(avg, pipe, exitstatus) != 0)
 				continue;
-			exitstatus = _forkprocess(av, pipe, fullpathpipe);
+			exitstatus = _forkprocess(avg, pipe, fullpathpipe);
 		}
 		else
 			free(pipe);

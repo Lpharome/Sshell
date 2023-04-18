@@ -20,9 +20,9 @@ extern char **environ;
 
 int prompt(void);
 char *_read(void);
-char *_fullpathbuffer(char **av, char *PATH, char *copy);
-int checkbuiltins(char **av, char *buffer, int exitstatus);
-int _forkprocess(char **av, char *buffer, char *fullpathbuffer);
+char *_fullpathpipe(char **avg, char *PATH, char *copy);
+int checkbuiltins(char **avg, char *pipe, int exitstatus);
+int _forkprocess(char **avg, char *pipe, char *fullpathpipe);
 
 /* String Helper Functions */
 
@@ -34,10 +34,10 @@ int _strlen(char *s);
 
 /*Tokenize & PATH Helper Functions*/
 
-char **tokenize(char *buffer);
+char **tokenize(char *pipe);
 int _splitPATH(char *str);
 int _PATHstrcmp(const char *s1, const char *s2);
-char *_concat(char *tmp, char **av, char *tok);
+char *_concat(char *tmp, char **avg, char *tokeen);
 
 
 /*Other Helper Funcs*/

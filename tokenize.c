@@ -26,5 +26,5 @@ char **tokenize(char *pipe)
 		i++;
 	}
 	avg[i] = NULL;
-	return (av);
-}}
+	return (avg);
+}

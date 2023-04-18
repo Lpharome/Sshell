@@ -11,14 +11,14 @@ int prompt(void)
 
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		putcountcount = write(STDOUT_FILENO, prompt, 2);
+		putcount = write(STDOUT_FILENO, prompt, 2);
 		if (putcount == -1)
 			exit(0);
 	}
 	return (0);
 }
 /**
- * _read - reads stdin and stores it in a buffer
+ * _read - reads stdin and stores it in a pipe
  *
  * Return: a pointer to the pipe
  */
@@ -29,7 +29,7 @@ char *_read(void)
 	char *pipe = NULL;
 	int j = 0;
 
-	readcount = getline(&pipe, &n, stdin);
+	getcount = getline(&pipe, &n, stdin);
 	if (getcount == -1)
 	{
 		free(pipe);
@@ -68,9 +68,9 @@ char *_fullpathpipe(char **avg, char *PATH, char *copy)
 	copy = _strdup(PATH);
 	PATHcount = _splitPATH(copy);
 	tokeen = strtok(copy, ": =");
-	while (tok != NULL)
+	while (tokeen != NULL)
 	{
-		concatstr = _concat(tmp, av, tokeen);
+		concatstr = _concat(tmp, avg, tokeen);
 		if (stat(concatstr, &h) == 0)
 		{
 			fullpathpipe = concatstr;
@@ -105,7 +105,7 @@ char *_fullpathpipe(char **avg, char *PATH, char *copy)
  * @exitstatus: exit status of execve
  * Return: 1 if user string is equal to env or 0 otherwise
  */
-int checkbuiltins(char **av, char *buffer, int exitstatus)
+int checkbuiltins(char **avg, char *pipe, int exitstatus)
 {
 	int i;
 
@@ -137,7 +137,7 @@ int checkbuiltins(char **av, char *buffer, int exitstatus)
  *
  * Return: 0 on success
  */
-int _forkprocess(char **av, char *pipe, char *fullpathpipe)
+int _forkprocess(char **avg, char *pipe, char *fullpathpipe)
 {
 	int i, status, result, exitstatus = 0;
 	pid_t pid;
