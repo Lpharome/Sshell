@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "simple_hell.h"
 
 /**
  * _eputs - prints an input string
@@ -52,14 +52,14 @@ int _eputchar(char c)
 int _putfd(char c, int fd)
 {
 	static int i;
-	static char buf[WRITE_BUF_SIZE];
+	static char buf[WRITE_BUFFER_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUFFER_FLUSH || i >= WRITE_BUFFER_SIZE)
 	{
 		write(fd, buf, i);
 		i = 0;
 	}
-	if (c != BUF_FLUSH)
+	if (c != BUFFER_FLUSH)
 		buf[i++] = c;
 	return (1);
 }
