@@ -14,24 +14,24 @@ int hsh(info_t *info, char **av)
 
 	while (r != -1 && builtin_ret != -2)
 	{
-		clear_info(info);
+		clear_info_alx(info);
 		if (interactive(info))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
+		_eputchar_alx(BUF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
-			set_info(info, av);
-			builtin_ret = find_builtin(info);
+			set_info_alx(info, av);
+			builtin_ret = find_builtin_alx(info);
 			if (builtin_ret == -1)
 				find_cmd(info);
 		}
 		else if (interactive(info))
 			_putchar('\n');
-		free_info(info, 0);
+		free_info_alx(info, 0);
 	}
-	write_history(info);
-	free_info(info, 1);
+	write_history_alx(info);
+	free_info_alx(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
 	if (builtin_ret == -2)
@@ -44,7 +44,7 @@ int hsh(info_t *info, char **av)
 }
 
 /**
- * find_builtin - finds a builtin command
+ * find_builtin_alx - finds a builtin command
  * @info: the parameter & return info struct
  *
  * Return: -1 if builtin not found,
@@ -52,18 +52,18 @@ int hsh(info_t *info, char **av)
  * 	1 if builtin found but not successful,
  * 	2 if builtin signals exit()
  */
-int find_builtin(info_t *info)
+int find_builtin_alx(info_t *info)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
-		{"exit", _myexit},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
+		{"exit", _myexit_alx},
+		{"env", _myenv_alx},
+		{"help", _myhelp_alx},
+		{"history", _myhistory_alx},
+		{"setenv", _mysetenv_alx},
+		{"unsetenv", _myunsetenv_alx},
+		{"cd", _mycd_alx},
+		{"alias", _myalias_alx},
 		{NULL, NULL}
 	};
 
@@ -100,7 +100,7 @@ void find_cmd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path_alx(info, _getenv_alx(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -108,13 +108,13 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
+		if ((interactive(info) || _getenv_alx(info, "PATH=")
 					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_error(info, "not found\n");
+			print_error_alx(info, "not found\n");
 		}
 	}
 }
@@ -138,9 +138,9 @@ void fork_cmd(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(info->path, info->argv, get_environ_alx(info)) == -1)
 		{
-			free_info(info, 1);
+			free_info_alx(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
@@ -154,7 +154,7 @@ void fork_cmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-				print_error(info, "Permission denied\n");
+				print_error_alx(info, "Permission denied\n");
 		}
 	}
 }

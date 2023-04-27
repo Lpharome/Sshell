@@ -26,19 +26,19 @@ int main(int ac, char **av)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				_eputs(av[0]);
-				_eputs(": 0: Can't open ");
-				_eputs(av[1]);
-				_eputchar('\n');
-				_eputchar(BUF_FLUSH);
+				_eputs_alx(av[0]);
+				_eputs_alx(": 0: Can't open ");
+				_eputs_alx(av[1]);
+				_eputchar_alx('\n');
+				_eputchar_alx(BUF_FLUSH);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
 		}
 		info->readfd = fd;
 	}
-	populate_env_list(info);
-	read_history(info);
+	populate_env_list_alx(info);
+	read_history_alx(info);
 	hsh(info, av);
 	return (EXIT_SUCCESS);
 }
