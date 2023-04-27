@@ -8,7 +8,7 @@
  */
 int _displayhistory(info_t *info)
 {
-	print_list(info->history);
+	printf_list(info->history);
 	return (0);
 }
 
@@ -30,7 +30,7 @@ int unfirm_alias(info_t *info, char *str)
 	c = *p;
 	*p = 0;
 	ret = delete_node_at_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+		obtain_node_index(info->alias, node_starts_with(info->alias, str, -1)));
 	*p = c;
 	return (ret);
 }
@@ -93,7 +93,7 @@ int _cpalias(info_t *info)
 		node = info->alias;
 		while (node)
 		{
-			print_alias(node);
+			printf_alias(node);
 			node = node->next;
 		}
 		return (0);
@@ -102,11 +102,10 @@ int _cpalias(info_t *info)
 	{
 		p = _strchr(info->argv[i], '=');
 		if (p)
-			set_alias(info, info->argv[i]);
+		      obtain_alias(info, info->argv[i]);
 		else
-			print_alias(node_starts_with(info->alias, info->argv[i], '='));
+			printf_alias(node_starts_with(info->alias, info->argv[i], '='));
 	}
 
 		return (0);
 }
-

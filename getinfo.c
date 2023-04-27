@@ -65,9 +65,9 @@ void relief_info(info_t *info, int all)
 			free_list(&(info->alias));
 		ffree(info->environ);
 			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
+		ffree((void **)info->cmd_buf);
 		if (info->readfd > 2)
 			close(info->readfd);
-		_putchar(BUF_FLUSH);
+		_putchar(BUFFER_FLUSH);
 	}
 }
